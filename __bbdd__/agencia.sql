@@ -43,15 +43,15 @@ CREATE TABLE IF NOT EXISTS `destinos` (
 -- Volcado de datos para la tabla `destinos`
 --
 
-INSERT INTO `destinos` (`destID`, `destNombre`, `regID`, `destPrecio`, `destAsientos`, `destDisponibles`, `destActivo`) VALUES
-(1, 'Londres (Heathrow)', 5, 9711, 5, 5, 1),
-(2, 'Amsterdam (Schiphol)', 5, 6231, 5, 5, 1),
-(3, 'Miami', 4, 6517, 5, 5, 1),
-(4, 'Tokio (Narita)', 7, 8704, 5, 5, 1),
-(5, 'Bangkok (Suvarnabhumi)', 8, 8469, 5, 5, 1),
-(6, 'París (Charles de Gaulle)', 5, 7713, 5, 5, 1),
-(7, 'Cancún (Cancún)', 3, 6494, 5, 5, 1),
-(8, 'Milán (Malpensa)', 5, 6756, 5, 5, 1);
+INSERT INTO `destinos` (`destID`, `destNombre`, `regID`, `destPrecio`, `destAsientos`, `destDisponibles`, `destActivo`, `imagen`) VALUES
+(1, 'Londres (Heathrow)', 5, 9711, 5, 5, 1, 'londres.jpg'),
+(2, 'Amsterdam (Schiphol)', 5, 6231, 5, 5, 1, 'amsterdam.jpg'),
+(3, 'Miami', 4, 6517, 5, 5, 1, 'miami.jpg'),
+(4, 'Tokio (Narita)', 7, 8704, 5, 5, 1, 'tokio.jpg'),
+(5, 'Bangkok (Suvarnabhumi)', 8, 8469, 5, 5, 1, 'bangkok.jpg'),
+(6, 'París (Charles de Gaulle)', 5, 7713, 5, 5, 1, 'paris.jpg'),
+(7, 'Cancún (Cancún)', 3, 6494, 5, 5, 1, 'cancun.jpg'),
+(8, 'Milán (Malpensa)', 5, 6756, 5, 5, 1, 'milan.jpg');
 
 -- --------------------------------------------------------
 
