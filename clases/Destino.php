@@ -10,10 +10,10 @@
         private $destAsientos;
         private $destDisponibles;
         private $destActivo;
-        private $destImg1;
-        private $destImg2;
-        private $destImg3;
-        private $destImg4;
+        // private $destImg1;
+        // private $destImg2;
+        // private $destImg3;
+        // private $destImg4;
 
             public function listarDestinos()
             {
@@ -22,7 +22,7 @@
                             d.regID, r.regNombre, 
                             destPrecio, 
                             destAsientos, destDisponibles, 
-                            destActivo, destImg1, destImg2, destImg3, destImg4
+                            destActivo
                         FROM destinos d, regiones r
                         WHERE d.regID = r.regID";
             $stmt = $link->prepare($sql);
@@ -41,7 +41,7 @@
                             destinos.regID, regNombre,  
                             destPrecio, 
                             destAsientos, destDisponibles,
-                            destActivo, destImg1, destImg2, destImg3, destImg4
+                            destActivo
                        FROM destinos, regiones
                        WHERE destinos.regID = regiones.regID
                          AND destID = :destID";
@@ -283,71 +283,71 @@
         }
 
 
-            /**
-         * @return mixed
-         */
-        public function getDestImg1()
-        {
-            return $this->destImg1;
-        }
+    //         /**
+    //      * @return mixed
+    //      */
+    //     public function getDestImg1()
+    //     {
+    //         return $this->destImg1;
+    //     }
 
-        /**
-         * @param mixed $destImg1
-         */
-        public function setDestImg1($destImg1): void
-        {
-            $this->destImg1 = $destImg1;
-        }
+    //     /**
+    //      * @param mixed $destImg1
+    //      */
+    //     public function setDestImg1($destImg1): void
+    //     {
+    //         $this->destImg1 = $destImg1;
+    //     }
 
 
-          /**
-         * @return mixed
-         */
-        public function getDestImg2()
-        {
-            return $this->destImg2;
-        }
+    //       /**
+    //      * @return mixed
+    //      */
+    //     public function getDestImg2()
+    //     {
+    //         return $this->destImg2;
+    //     }
 
-        /**
-         * @param mixed $destImg2
-         */
-        public function setDestImg2($destImg2): void
-        {
-            $this->destImg2 = $destImg2;
-        }
+    //     /**
+    //      * @param mixed $destImg2
+    //      */
+    //     public function setDestImg2($destImg2): void
+    //     {
+    //         $this->destImg2 = $destImg2;
+    //     }
 
-          /**
-         * @return mixed
-         */
-        public function getDestImg3()
-        {
-            return $this->destImg3;
-        }
+    //       /**
+    //      * @return mixed
+    //      */
+    //     public function getDestImg3()
+    //     {
+    //         return $this->destImg3;
+    //     }
 
-        /**
-         * @param mixed $destImg3
-         */
-        public function setDestImg3($destImg3): void
-        {
-            $this->destImg3 = $destImg3;
-        }
+    //     /**
+    //      * @param mixed $destImg3
+    //      */
+    //     public function setDestImg3($destImg3): void
+    //     {
+    //         $this->destImg3 = $destImg3;
+    //     }
 
-                  /**
-         * @return mixed
-         */
-        public function getDestImg4()
-        {
-            return $this->destImg4;
-        }
+    //               /**
+    //      * @return mixed
+    //      */
+    //     public function getDestImg4()
+    //     {
+    //         return $this->destImg4;
+    //     }
 
-        /**
-         * @param mixed $destImg4
-         */
-        public function setDestImg4($destImg4): void
-        {
-            $this->destImg4 = $destImg4;
-        }
-    }
+    //     /**
+    //      * @param mixed $destImg4
+    //      */
+    //     public function setDestImg4($destImg4): void
+    //     {
+    //         $this->destImg4 = $destImg4;
+    //     }
+     }
 
 
 
