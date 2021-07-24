@@ -21,7 +21,7 @@
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link" href="#">Inicio</a>
+                        <a class="nav-item nav-link" href="index.php">Inicio</a>
                         <a class="nav-item nav-link" href="adminRegiones.php">Regiones</a>
                         <a class="nav-item nav-link" href="adminDestinos.php">Destinos</a>
        
