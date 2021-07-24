@@ -10,10 +10,8 @@
         private $destAsientos;
         private $destDisponibles;
         private $destActivo;
-        // private $destImg1;
-        // private $destImg2;
-        // private $destImg3;
-        // private $destImg4;
+        private $imagen;
+
 
             public function listarDestinos()
             {
@@ -22,7 +20,7 @@
                             d.regID, r.regNombre, 
                             destPrecio, 
                             destAsientos, destDisponibles, 
-                            destActivo
+                            destActivo, imagen
                         FROM destinos d, regiones r
                         WHERE d.regID = r.regID";
             $stmt = $link->prepare($sql);
@@ -41,7 +39,7 @@
                             destinos.regID, regNombre,  
                             destPrecio, 
                             destAsientos, destDisponibles,
-                            destActivo
+                            destActivo, imagen
                        FROM destinos, regiones
                        WHERE destinos.regID = regiones.regID
                          AND destID = :destID";
@@ -57,6 +55,7 @@
                 $this->setDestPrecio($destino['destPrecio']);
                 $this->setDestAsientos($destino['destAsientos']);
                 $this->setDestDisponibles($destino['destDisponibles']);
+                $this->setDestDisponibles($destino['imagen']);
                 $this->setDestActivo(1);
                 return true;
               }
