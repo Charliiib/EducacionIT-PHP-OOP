@@ -36,14 +36,15 @@ CREATE TABLE IF NOT EXISTS `destinos` (
   `destPrecio` int(7) unsigned NOT NULL,
   `destAsientos` tinyint(2) unsigned NOT NULL COMMENT 'Cantidad TOTAL de Asientos',
   `destDisponibles` tinyint(2) unsigned NOT NULL COMMENT 'Cantidad DISPONIBLE\\n de Asientos',
-  `destActivo` tinyint(1) NOT NULL DEFAULT '1'
+  `destActivo` tinyint(1) NOT NULL DEFAULT '1',
+ `destImagen` tinytext 
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `destinos`
 --
 
-INSERT INTO `destinos` (`destID`, `destNombre`, `regID`, `destPrecio`, `destAsientos`, `destDisponibles`, `destActivo`, `imagen`) VALUES
+INSERT INTO `destinos` (`destID`, `destNombre`, `regID`, `destPrecio`, `destAsientos`, `destDisponibles`, `destActivo`, `destImagen`) VALUES
 (1, 'Londres (Heathrow)', 5, 9711, 5, 5, 1, 'londres.jpg'),
 (2, 'Amsterdam (Schiphol)', 5, 6231, 5, 5, 1, 'amsterdam.jpg'),
 (3, 'Miami', 4, 6517, 5, 5, 1, 'miami.jpg'),
