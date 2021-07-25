@@ -10,7 +10,7 @@
     <main class="container">
         <h1>Panel de administración de destinos</h1>
         
-        <table class="table table-border table-hover table-striped">
+        <table class="table table-border table-hover table-striped  mb-4">
             <thead class="thead-dark">
                 <tr>
                     <th>id</th>
