@@ -3,6 +3,9 @@
     require 'config/config.php';
     $Autenticar = new autenticar;
     $Autenticar->autenticar();
+    $destino = new Destino;
+    $destinos = $destino->listarDestinos();
+
     $Region = new Region;
         $regiones = $Region->listarRegiones();
     include 'includes/header.php';
@@ -13,7 +16,7 @@
 
         <div class="alert bg-light border p-4">
 
-            <form action="agregarDestino.php" method="post">
+            <form action="agregarDestino.php" method="post" enctype="multipart/form-data">
 
                 <div class="form-group">
                 <label for="destNombre">Nombre del Destino:</label>
@@ -61,6 +64,12 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="destImagen">Imagen del destino</label>
+                        <input type="file" name="destImagen" class="form-control-file" id="destImagen">
+                </div>
+
+               
                     <button class="btn btn-dark">Agregar destino</button>
                     <a href="adminDestinos.php" class="btn btn-outline-secondary">
                         Volver a panel de destinos

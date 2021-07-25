@@ -14,7 +14,7 @@
 
             <div class="alert bg-light border p-4">
 
-                <form action="modificarDestino.php" method="post">
+                <form action="modificarDestino.php" method="post"  enctype="multipart/form-data">
 
                     <div class="form-group">
                     <label for="destNombre">Nombre del Destino:</label>
@@ -74,8 +74,18 @@
                         </div>
                     </div>
 
-                    <input type="hidden" name="destID"
-                           value="<?= $Destino->getDestID() ?>">
+                    <div class="form-group">
+                    <label for="destImagen">Imagen del Producto:<br>
+                       <br>
+                         <img src="destinos/<?= $Destino->getDestImagen() ?>" class="img-thumbnail">
+                         
+                    </label>
+                        <input type="file" name="destImagen" class="form-control-file" id="destImagen">
+                    </div>
+
+                    <input type="text" name="destImagenOriginal" value="<?= $Destino->getDestImagen() ?>">
+
+                    <input type="number" name="destID" value="<?= $Destino->getDestID() ?>">
 
                     <button class="btn btn-dark">Modificar destino</button>
                     <a href="adminDestinos.php" class="btn btn-outline-secondary">

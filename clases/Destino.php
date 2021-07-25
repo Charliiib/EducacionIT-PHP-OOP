@@ -1,16 +1,16 @@
 <?php
 
-    class Destino
+    class destino
     {
-        private $destID;
-        private $destNombre;
-        private $regID;
-        protected $regNombre;
-        private $destPrecio;
-        private $destAsientos;
-        private $destDisponibles;
-        private $destActivo;
-        private $imagen;
+        public $destID;
+        public $destNombre;
+        public $regID;
+        public $regNombre;
+        public $destPrecio;
+        public $destAsientos;
+        public $destDisponibles;
+        public $destActivo;
+        public $destImagen;
 
 
             public function listarDestinos()
@@ -20,14 +20,36 @@
                             d.regID, r.regNombre, 
                             destPrecio, 
                             destAsientos, destDisponibles, 
-                            destActivo, imagen
+                            destActivo, destImagen
                         FROM destinos d, regiones r
                         WHERE d.regID = r.regID";
             $stmt = $link->prepare($sql);
             $stmt->execute();
-
             $destinos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $destinos;
+            }
+
+            public function subirImagen()
+            {
+                //imagen predeterminada si no enviaron nada
+                // EN AGREGAR
+                $destImagen = 'noDisponible.jpg';
+    
+                // imagen original en MODIFICAR si no enviaron nada
+                if( isset( $_POST['destImagenOriginal'] ) )
+                {
+                    $destImagen = $_POST['destImagenOriginal'];
+                }
+    
+                // si enviaron algo tanto en agregar como en modificar
+                if( $_FILES['destImagen']['error'] == 0 )
+                {
+                    $dir = 'destinos/';
+                    $tmp = $_FILES['destImagen']['tmp_name'];
+                    $destImagen = $_FILES['destImagen']['name'];
+                    move_uploaded_file( $tmp, $dir.$destImagen );
+                }
+                return $destImagen;
             }
 
 
@@ -35,11 +57,11 @@
             {
             $destID = $_GET['destID'];
             $link = Conexion::conectar();
-            $sql = "SELECT destID, destNombre, 
+            $sql = "SELECT 
+                            destID, destNombre, 
                             destinos.regID, regNombre,  
-                            destPrecio, 
-                            destAsientos, destDisponibles,
-                            destActivo, imagen
+                            destPrecio, destAsientos, destDisponibles,
+                            destActivo, destImagen
                        FROM destinos, regiones
                        WHERE destinos.regID = regiones.regID
                          AND destID = :destID";
@@ -55,15 +77,18 @@
                 $this->setDestPrecio($destino['destPrecio']);
                 $this->setDestAsientos($destino['destAsientos']);
                 $this->setDestDisponibles($destino['destDisponibles']);
-                $this->setDestDisponibles($destino['imagen']);
+                $this->setDestImagen($destino['destImagen']);
                 $this->setDestActivo(1);
                 return true;
               }
               return false;
             }
 
+          
+    
 
-                public function agregarDestino()
+
+            public function agregarDestino()
                 {
                 $link = Conexion::conectar();
                 $destNombre = $_POST['destNombre'];
@@ -71,28 +96,39 @@
                 $destPrecio = $_POST['destPrecio'];
                 $destAsientos = $_POST['destAsientos'];
                 $destDisponibles= $_POST['destDisponibles'];
+                $destImagen  = Destino::subirImagen();
                 $sql = "INSERT INTO destinos
-                                    (destNombre, regID, destPrecio, destAsientos, destDisponibles)
+                                    (destNombre, regID, destPrecio, destAsientos, destDisponibles, destImagen)
                                 VALUES
-                                 (:destNombre, :regID, :destPrecio, :destAsientos, :destDisponibles) ";
+                                 (:destNombre, :regID, :destPrecio, :destAsientos, :destDisponibles, :destImagen) ";
                 $stmt = $link->prepare($sql);
                 $stmt->bindParam(':destNombre', $destNombre, PDO::PARAM_STR);
                 $stmt->bindParam(':regID', $regID, PDO::PARAM_INT);
                 $stmt->bindParam(':destPrecio', $destPrecio, PDO::PARAM_INT);
                 $stmt->bindParam(':destAsientos', $destAsientos, PDO::PARAM_INT);
                 $stmt->bindParam(':destDisponibles', $destDisponibles, PDO::PARAM_INT);
+                $stmt->bindParam(':destImagen', $destImagen, PDO::PARAM_STR);
                 if ( $stmt->execute() )
                   {
+                   $this->setDestID($link->lastInsertId()); 
                    $this->setDestNombre($destNombre); 
                    $this->setRegID($regID);
                    $this->setDestPrecio($destPrecio);
                    $this->setDestAsientos($destAsientos);
                    $this->setDestDisponibles($destDisponibles);
-                   $this->setDestID($link->lastInsertId()); 
+                   $this->setDestImagen($destImagen);
+                  
                    return true;
                   }
                   return false;
                 }
+
+
+             
+
+
+
+
 
             public function modificarDestino()
             {
@@ -103,12 +139,14 @@
               $destAsientos = $_POST['destAsientos'];
               $destDisponibles = $_POST['destDisponibles'];
               $destID = $_POST['destID'];
+              $destImagen  = Destino::subirImagen();
               $sql = "UPDATE destinos
                         SET destNombre = :destNombre,
                             regID = :regID,
                             destPrecio = :destPrecio,
                             destAsientos = :destAsientos,
-                            destDisponibles = :destDisponibles
+                            destDisponibles = :destDisponibles,
+                            destImagen = :destImagen
                       WHERE destID = :destID";
               $stmt = $link->prepare($sql);
               $stmt->bindParam(':destNombre', $destNombre, PDO::PARAM_STR);
@@ -116,6 +154,7 @@
               $stmt->bindParam(':destPrecio', $destPrecio, PDO::PARAM_INT);
               $stmt->bindParam(':destAsientos', $destAsientos, PDO::PARAM_INT);
               $stmt->bindParam(':destDisponibles', $destDisponibles, PDO::PARAM_INT);
+              $stmt->bindParam(':destImagen', $destImagen, PDO::PARAM_STR);
               $stmt->bindParam(':destID', $destID, PDO::PARAM_INT);
               if ( $stmt->execute() )
               {
@@ -124,6 +163,7 @@
                 $this->setDestPrecio($destPrecio);
                 $this->setDestAsientos($destAsientos);
                 $this->setDestDisponibles($destDisponibles);
+                $this->setDestImagen($destImagen);
                 $this->setDestID($destID);
                 return true;
               }
@@ -282,75 +322,22 @@
         }
 
 
-    //         /**
-    //      * @return mixed
-    //      */
-    //     public function getDestImg1()
-    //     {
-    //         return $this->destImg1;
-    //     }
+        /**
+         * @return mixed
+         */
+        public function getDestImagen()
+        {
+            return $this->destImagen;
+        }
 
-    //     /**
-    //      * @param mixed $destImg1
-    //      */
-    //     public function setDestImg1($destImg1): void
-    //     {
-    //         $this->destImg1 = $destImg1;
-    //     }
-
-
-    //       /**
-    //      * @return mixed
-    //      */
-    //     public function getDestImg2()
-    //     {
-    //         return $this->destImg2;
-    //     }
-
-    //     /**
-    //      * @param mixed $destImg2
-    //      */
-    //     public function setDestImg2($destImg2): void
-    //     {
-    //         $this->destImg2 = $destImg2;
-    //     }
-
-    //       /**
-    //      * @return mixed
-    //      */
-    //     public function getDestImg3()
-    //     {
-    //         return $this->destImg3;
-    //     }
-
-    //     /**
-    //      * @param mixed $destImg3
-    //      */
-    //     public function setDestImg3($destImg3): void
-    //     {
-    //         $this->destImg3 = $destImg3;
-    //     }
-
-    //               /**
-    //      * @return mixed
-    //      */
-    //     public function getDestImg4()
-    //     {
-    //         return $this->destImg4;
-    //     }
-
-    //     /**
-    //      * @param mixed $destImg4
-    //      */
-    //     public function setDestImg4($destImg4): void
-    //     {
-    //         $this->destImg4 = $destImg4;
-    //     }
-     }
-
-
-
-
+        /**
+         * @param mixed $destImagen
+         */
+        public function setDestImagen($destImagen)
+        {
+            $this->destImagen = $destImagen;
+        }
 
 
     
+}
