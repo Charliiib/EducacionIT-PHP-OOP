@@ -18,7 +18,20 @@ if ( isset( $_SESSION['login'] ) ){
 }
     ?>
 
+        <section class="list-group">
+            <a href="adminRegiones.php" class="list-group-item list-group-item-action">
+                Panel de administración Regiones.
+            </a>
+            <a href="adminDestinos.php" class="list-group-item list-group-item-action">
+                Panel de administración Destinos
+
+            <a href="adminUsuarios.php" class="list-group-item list-group-item-action">
+                Panel de administración Usuarios.
+            </a>
         
+        </section>        
+
+
     </main>
 <?php
     include 'includes/footer.php';
