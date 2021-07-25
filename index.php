@@ -14,7 +14,7 @@
         foreach ($destinos as $destino){
 ?>
             <div class="card col-lg-3 col-md-6 col-sm-12 ml-5 mb-5 mt-5 text-center">
-                <img src="destinos/<?= $destino['imagen'] ?>" class="card-img-top mt-2"> 
+                <img src="destinos/<?= $destino['destImagen'] ?>" class="card-img-top mt-2"> 
                 <hr>
                     <h2><?= $destino['destNombre'] ?></h2>
                         <?= $destino['regNombre'] ?>  <br>
